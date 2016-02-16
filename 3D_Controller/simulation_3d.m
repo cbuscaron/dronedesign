@@ -13,6 +13,8 @@ addpath('utils');
 % real-time
 real_time = true;
 
+video = true;
+
 % max time
 max_time = 20;
 
@@ -21,6 +23,11 @@ params = sys_params;
 
 %% **************************** FIGURES *****************************
 disp('Initializing figures...');
+if video
+  video_writer = VideoWriter('3DQuad2', 'MPEG-4');
+  open(video_writer);
+end
+
 h_fig = figure;
 h_3d = gca;
 axis equal
@@ -92,6 +99,10 @@ for iter = 1:max_iter
         err = 'Ode45 Unstable';
         break;
     end
+    
+    if video
+        writeVideo(video_writer, getframe(h_fig));
+    end
 
     % Pause to make real-time
     if real_time && (t < cstep)
@@ -121,11 +132,19 @@ h_vel = figure('Name', ['Quad velocity']);
 plot_state(h_vel, QP.state_hist(4:6,:), QP.time_hist, 'vel', 'vic');
 plot_state(h_vel, QP.state_des_hist(4:6,:), QP.time_hist, 'vel', 'des');
 
+if video
+        writeVideo(video_writer, getframe(h_vel));
+    end
+
 if(~isempty(err))
     error(err);
 end
 
 disp('finished.')
+
+if video
+  close(video_writer);
+end
 
 t_out = ttraj;
 s_out = xtraj;
