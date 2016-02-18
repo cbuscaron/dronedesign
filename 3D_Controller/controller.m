@@ -35,19 +35,19 @@ Kpz = 20;
 F = params.mass*(params.gravity + des_state.acc(3) + Kdz*(des_state.vel(3)-state.vel(3)) + Kpz*(des_state.pos(3)-state.pos(3)));
 
 Kdx = 1;
-Kpx = 15;
+Kpx = 10;
 
-Kdy = .01;
-Kpy = 45;
+Kdy = 1;
+Kpy = 30;
 
 Kpp = .5;
-Kdp = 0;
+Kdp = 0.1;
 
 Kpt = 10;
-Kdt = 0;
+Kdt = 0.1;
 
 Kppsi = 10;
-Kdpsi = 0;
+Kdpsi = 0.1;
 
 r1_des = des_state.acc(1) + Kdx*(des_state.vel(1)-state.vel(1)) + Kpx*(des_state.pos(1)-state.pos(1));
 r2_des = des_state.acc(2) + Kdy*(des_state.vel(2)-state.vel(2)) + Kpy*(des_state.pos(2)-state.pos(2));

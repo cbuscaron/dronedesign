@@ -13,7 +13,7 @@ addpath('utils');
 % real-time
 real_time = true;
 
-video = true;
+video = false;
 
 % max time
 max_time = 20;
@@ -133,8 +133,8 @@ plot_state(h_vel, QP.state_hist(4:6,:), QP.time_hist, 'vel', 'vic');
 plot_state(h_vel, QP.state_des_hist(4:6,:), QP.time_hist, 'vel', 'des');
 
 if video
-        writeVideo(video_writer, getframe(h_vel));
-    end
+    writeVideo(video_writer, getframe(h_vel));
+end
 
 if(~isempty(err))
     error(err);
